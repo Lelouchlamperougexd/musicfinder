@@ -6,4 +6,4 @@ A web application to search for songs or artists using the Spotify API. Users ca
 ## Setup Instructions
 1. Clone the repository:
    ```bash
-   git clone 
+   git clone https://github.com/Lelouchlamperougexd/musicfinder
