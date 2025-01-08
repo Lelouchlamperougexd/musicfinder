@@ -1,7 +1,7 @@
 /* General Styles */
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #1db954, #191414);
+    background: #1db954;
     color: #ffffff;
     margin: 0;
     padding: 0;
@@ -37,7 +37,7 @@ button {
     padding: 12px 20px;
     font-size: 1em;
     font-weight: bold;
-    background-color: #1db954;
+    background-color: #0b0c0c;
     color: #ffffff;
     border: none;
     border-radius: 30px;
