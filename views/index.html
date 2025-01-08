@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Spotify Song Finder</title>
+</head>
+<body>
+    <h1>Spotify Song Finder</h1>
+    <form id="search-form">
+        <input type="text" name="query" placeholder="Enter song or artist name" required>
+        <button type="submit">Search</button>
+    </form>
+    <div id="results"></div>
+
+    <script>
+        document.getElementById('search-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const query = e.target.query.value;
+
+            const response = await fetch('/search', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ query }),
+            });
+
+            const data = await response.json();
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+
+            if (data.results) {
+                data.results.forEach((track) => {
+                    const trackDiv = document.createElement('div');
+                    trackDiv.classList.add('track');
+                    trackDiv.innerHTML = `
+                        <img src="${track.image}" alt="Album Cover" />
+                        <p><strong>Song:</strong> ${track.name}</p>
+                        <p><strong>Artist(s):</strong> ${track.artists}</p>
+                        <p><strong>Album:</strong> ${track.album}</p>
+                        <p><strong>Release Date:</strong> ${track.releaseDate}</p>
+                        <a href="${track.link}" target="_blank">Listen on Spotify</a>
+                    `;
+                    resultsDiv.appendChild(trackDiv);
+                });
+            } else {
+                resultsDiv.innerHTML = '<p>No results found.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
